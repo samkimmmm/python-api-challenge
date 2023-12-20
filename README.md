@@ -1,7 +1,7 @@
-# python-api-challenge
+# Weather & Travel Analysis
 
 # Overview
-Using the [citipy Python library](https://pypi.python.org/pypi/citipy) and [OpenWeatherMap API](https://openweathermap.org/api), I analyzed the weather information to plan future vacations near the equator.
+This challenge utilized the [citipy Python library](https://pypi.python.org/pypi/citipy) and [OpenWeatherMap API](https://openweathermap.org/api) to analyze weather information, aiding in the planning of future vacations near the equator.
 
 # Technologies
 * Pandas
@@ -10,80 +10,48 @@ Using the [citipy Python library](https://pypi.python.org/pypi/citipy) and [Open
 * Scipy
 
 # WeatherPy
-I used the OpenWewatherMap API to retrieve weather data from the cities that were listed in the starter code.
-
-url = "http://api.openweathermap.org/data/2.5/weather?"
-
-# Define an empty list to fetch the weather data for each city
-city_data = []
-
-# Print to logger
-print("Beginning Data Retrieval     ")
-print("-----------------------------")
-
-# Create counters
-record_count = 1
-set_count = 1
-
-# Loop through all the cities in our list to fetch weather data
-for i, city in enumerate(cities):
-        
-    # Group cities in sets of 50 for logging purposes
-    if (i % 50 == 0 and i >= 50):
-        set_count += 1
-        record_count = 0
-
-    # Create endpoint URL with each city
-    city_url = f"{url}appid={weather_api_key}&units=metric&q={city}"
-    
-    # Log the url, record, and set numbers
-    print("Processing Record %s of Set %s | %s" % (record_count, set_count, city))
-
-    # Add 1 to the record count
-    record_count += 1
-
-    # Run an API request for each of the cities
-    try:
-        # Parse the JSON and retrieve data
-        city_weather = requests.get(city_url).json()
-
-        # Parse out latitude, longitude, max temp, humidity, cloudiness, wind speed, country, and date
-        city_lat = city_weather["coord"]["lat"]
-        city_lng = city_weather["coord"]["lon"]
-        city_max_temp = city_weather["main"]["temp_max"]
-        city_humidity = city_weather["main"]["humidity"]
-        city_clouds = city_weather["clouds"]["all"]
-        city_wind = city_weather["wind"]["speed"]
-        city_country = city_weather["sys"]["country"]
-        city_date = city_weather["dt"]
-
-        # Append the City information into city_data list
-        city_data.append({"City": city, 
-                          "Lat": city_lat, 
-                          "Lng": city_lng, 
-                          "Max Temp": city_max_temp,
-                          "Humidity": city_humidity,
-                          "Cloudiness": city_clouds,
-                          "Wind Speed": city_wind,
-                          "Country": city_country,
-                          "Date": city_date})
-
-    # If an error is experienced, skip the city
-    except:
-        print("City not found. Skipping...")
-        pass
-              
-# Indicate that Data Loading is complete 
-print("-----------------------------")
-print("Data Retrieval Complete      ")
-print("-----------------------------")
+I employed the OpenWewatherMap API to retrieve weather data for cities listed in the starter code, creating a DataFrame of the results.
+<img width="760" alt="Screenshot 2023-12-19 at 3 59 18 PM" src="https://github.com/samkimmmm/python-api-challenge/assets/135805393/148c06ec-1a7a-4297-a347-bd57aeeccf6a">
 
 ## Create Plots
-In this section, I created scatter plots to showcase the following relationships:
+I generated scatter plots showcasing relationships between latitude and various weather parameters:
 * Latitude vs. Temperature
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/58a1ae27-c49d-4f62-92b8-1774d97ad450)
 * Latitude vs. Humidity
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/c074d782-0c72-401f-b4a3-c8a52bfc4103)
 * Latitude vs. Cloudiness
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/77078381-1fd8-4ae6-a5e4-61c8fd0c6740)
 * Latitude vs. Wind Speed
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/bda0dacc-d314-4f90-85d5-cd1e8029217d)
 
 ## Linear Regression
-In this section, I computed the linear regressions for each said relationship, separated the plots into Northern and Southern Hemispheres, then created a series of scatter plots to include the models and their respective formulas and r values.
+Linear regressions were computed for each relationship, with separate plots for the Northern and Southern Hemispheres. Scatter plots include regression models, formulas, and r values.
+## Northern Hemisphere: Temperature vs. Latitude
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/9b9f65c5-e33a-4bde-83ce-b55304a4fc5b)
+## Southern Hemisphere: Temperature vs. Latitude
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/edb24cba-6a30-45d6-a40b-99f0ee271375)
+## Northern Hemisphere: Humidity vs. Latitude
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/a4e405e4-f19a-4e55-b15c-0bf39571d5df)
+## Southern Hemisphere: Humidity vs. Latitude
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/0cd991da-a559-4071-914a-6aeb9cd5ddb3)
+## Northern Hemisphere: Cloudiness vs. Latitude
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/5e350002-a742-48fe-b400-b743d15fa0d3)
+## Southern Hemisphere: Cloudiness vs. Latitude
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/8c4f239f-3c19-42df-ac4f-ba0771566a3a)
+## Northern Hemisphere: Wind Speed vs. Latitude
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/d9fc34f3-a2ae-40b1-b8d9-fb6c773431cd)
+## Southern hemisphere: Wind Speed vs. Latitude
+![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/12b3786a-e83b-4e96-9de8-9d8090decce4)
+
+# VacationPy
+The Geoapify API and the geoViews Python library were used to create map visualizations.
+
+## Creating the map
+Each point on the map represents a city from the "city_data_df" DataFrame, with the size of each point relative to its humidity rating.
+<img width="1281" alt="Screenshot 2023-12-20 at 3 21 11 PM" src="https://github.com/samkimmmm/python-api-challenge/assets/135805393/fe534d43-826a-42f0-96c7-a7d704104271">
+
+* A new DataFrame called "hotel_df" was created by narrowing down the "city_data_df" DataFrame to an ideal humidity level (10).
+<img width="817" alt="Screenshot 2023-12-20 at 3 24 31 PM" src="https://github.com/samkimmmm/python-api-challenge/assets/135805393/19dc4b5e-b470-4a21-932d-75f07b8daa43">
+
+* The Geoapify API was employed to find the first hotel within 10,000 meters of the coordinates for each city, and the hotel names were saved in the "hotel_df" DataFrame under a new column "Hotel Name".
+* <img width="517" alt="Screenshot 2023-12-20 at 3 25 14 PM" src="https://github.com/samkimmmm/python-api-challenge/assets/135805393/d7b4259a-3fe3-427a-aad7-99ececff5cd7">
