@@ -16,12 +16,16 @@ I employed the OpenWewatherMap API to retrieve weather data for cities listed in
 ## Create Plots
 I generated scatter plots showcasing relationships between latitude and various weather parameters:
 * Latitude vs. Temperature
+
 ![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/58a1ae27-c49d-4f62-92b8-1774d97ad450)
 * Latitude vs. Humidity
+
 ![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/c074d782-0c72-401f-b4a3-c8a52bfc4103)
 * Latitude vs. Cloudiness
+
 ![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/77078381-1fd8-4ae6-a5e4-61c8fd0c6740)
 * Latitude vs. Wind Speed
+
 ![image](https://github.com/samkimmmm/python-api-challenge/assets/135805393/bda0dacc-d314-4f90-85d5-cd1e8029217d)
 
 ## Linear Regression
